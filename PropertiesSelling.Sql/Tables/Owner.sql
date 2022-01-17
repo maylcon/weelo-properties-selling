@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Owner]
+(
+	[IdOwner] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(100) NOT NULL, 
+    [Address] NVARCHAR(100) NOT NULL, 
+    [Photo] IMAGE NULL, 
+    [Birthday] DATE NOT NULL
+)
