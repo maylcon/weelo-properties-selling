@@ -12,9 +12,9 @@ namespace PropertiesSelling.Core.Definitions.Service
     {
         Task<ReadProperty> CreateProperty(CreateProperty request);
 
-        Task<ReadProperty> UpdateProperty(UpdateProperty request);
+        Task UpdateProperty(UpdateProperty request);
 
-        Task<ReadProperty> UpdatePriceProperty(UpdatePriceProperty request);
+        Task UpdatePriceProperty(UpdatePriceProperty request);
 
         Task<IList<ReadProperty>> GetAllProperties();
 

@@ -11,7 +11,7 @@ namespace PropertiesSelling.Core.Definitions.Service
     {
         Task<ReadOwner> CreateOwner (CreateOwner request);
 
-        Task<ReadOwner> UpdateOwner(UpdateOwner request);
+        Task UpdateOwner(UpdateOwner request);
 
         Task<IList<ReadOwner>> GetAllOwner();
 

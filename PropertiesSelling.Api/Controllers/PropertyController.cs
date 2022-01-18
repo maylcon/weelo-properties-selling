@@ -41,7 +41,7 @@ namespace PropertiesSelling.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new ApiResponse("Query error!", ex, 400));
+                return BadRequest(new ApiResponse("Query error!", ex.Message, 400));
             }
         }
 
@@ -58,13 +58,13 @@ namespace PropertiesSelling.Api.Controllers
                     return BadRequest(new ApiResponse("Query error! - Model is not valid", updateRequest, 400));
                 }
 
-                var responseUpdate = await _propertyService.UpdateProperty(updateRequest);
+                await _propertyService.UpdateProperty(updateRequest);
 
-                return Ok(new ApiResponse("Query done!", responseUpdate, 200));
+                return Ok(new ApiResponse("Query done!", "Property update", 200));
             }
             catch (Exception ex)
             {
-                return BadRequest(new ApiResponse("Query error!", ex, 400));
+                return BadRequest(new ApiResponse("Query error!", ex.Message, 400));
             }
         }
 
@@ -94,13 +94,13 @@ namespace PropertiesSelling.Api.Controllers
                     return BadRequest(new ApiResponse("Query error! - Model is not valid", updateRequest, 400));
                 }
 
-                var responseUpdate = await _propertyService.UpdatePriceProperty(updateRequest);
+                await _propertyService.UpdatePriceProperty(updateRequest);
 
-                return Ok(new ApiResponse("Query done!", responseUpdate, 200));
+                return Ok(new ApiResponse("Query done!", "Price property update", 200));
             }
             catch (Exception ex)
             {
-                return BadRequest(new ApiResponse("Query error!", ex, 400));
+                return BadRequest(new ApiResponse("Query error!", ex.Message, 400));
             }
         }
     }

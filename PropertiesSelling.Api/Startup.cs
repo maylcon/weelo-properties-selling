@@ -11,11 +11,13 @@ using Microsoft.OpenApi.Models;
 using PropertiesSelling.Core.Definitions.Repository;
 using PropertiesSelling.Core.Definitions.Service;
 using PropertiesSelling.Core.Implements.Services;
+using PropertiesSelling.Core.Mappers;
 using PropertiesSelling.Infraestructure.Context;
 using PropertiesSelling.Infraestructure.Implements.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PropertiesSelling.Api
@@ -42,7 +44,8 @@ namespace PropertiesSelling.Api
             services.AddScoped<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IPropertyRepository, PropertyRepository>();
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PropertiesSelling.Api", Version = "v1" });

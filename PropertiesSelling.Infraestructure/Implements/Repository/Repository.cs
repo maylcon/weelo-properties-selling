@@ -64,7 +64,7 @@ namespace PropertiesSelling.Infraestructure.Implements.Repository
             return entity;            
         }
 
-        public async Task<TEntity> UpdateAsync(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             if (entity == null)
             {
@@ -73,7 +73,6 @@ namespace PropertiesSelling.Infraestructure.Implements.Repository
             
             Entities.Update(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            return entity;
         }
 
         public void Delete(TEntity entity)

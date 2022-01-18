@@ -31,9 +31,9 @@ namespace PropertiesSelling.Core.Implements.Services
             return _mapper.Map<Property, ReadProperty>(property);
         }
 
-        public async Task<ReadProperty> UpdateProperty(UpdateProperty updateProperty)
+        public async Task UpdateProperty(UpdateProperty updateProperty)
         {
-            var propertyEntity = this._propertyRepository.TableNoTracking.Where(x => x.IdProperty == updateProperty.IdProperty).FirstOrDefault();
+            var propertyEntity = _propertyRepository.TableNoTracking.Where(x => x.IdProperty == updateProperty.IdProperty).FirstOrDefault();
             if (propertyEntity == null)
             {
                 throw new KeyNotFoundException();
@@ -46,16 +46,15 @@ namespace PropertiesSelling.Core.Implements.Services
             propertyEntity.Year = !updateProperty.Year.HasValue ? propertyEntity.Year : updateProperty.Year.Value;
             propertyEntity.IdOwner = !updateProperty.IdOwner.HasValue ? propertyEntity.IdOwner : updateProperty.IdOwner.Value;
 
-            Property propertyUpdate = await this._propertyRepository.UpdateAsync(propertyEntity);
-            return _mapper.Map<Property, ReadProperty>(propertyUpdate);
+            await _propertyRepository.UpdateAsync(propertyEntity);
+            
 
         }
 
-        public async Task<ReadProperty> UpdatePriceProperty(UpdatePriceProperty request)
+        public async Task UpdatePriceProperty(UpdatePriceProperty request)
         {
-            await this._propertyRepository.UpdatePrice(request.IdProperty, request.Price);
-            var result = this._propertyRepository.Table.FirstOrDefault(x => x.IdProperty == request.IdProperty);
-            return _mapper.Map<Property, ReadProperty>(result);
+            await _propertyRepository.UpdatePrice(request.IdProperty, request.Price);
+            _propertyRepository.Table.FirstOrDefault(x => x.IdProperty == request.IdProperty);  
         }
 
 

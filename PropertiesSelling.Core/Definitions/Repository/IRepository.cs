@@ -14,7 +14,7 @@ namespace PropertiesSelling.Core.Definitions.Repository
 
         Task<TEntity> InsertAsync(TEntity entity);
 
-        Task<TEntity> UpdateAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity);
 
         TEntity GetById(Guid id);
 

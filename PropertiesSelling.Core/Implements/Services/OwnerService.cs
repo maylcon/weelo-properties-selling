@@ -31,7 +31,7 @@ namespace PropertiesSelling.Core.Implements.Services
             return _mapper.Map<Owner, ReadOwner>(result);
         }
 
-        public async Task<ReadOwner> UpdateOwner(UpdateOwner updateOwner)
+        public async Task UpdateOwner(UpdateOwner updateOwner)
         {
             Owner ownerEntity = this._ownerRepository.TableNoTracking.Where(x => x.IdOwner == updateOwner.IdOwner).FirstOrDefault();
 
@@ -44,9 +44,7 @@ namespace PropertiesSelling.Core.Implements.Services
             ownerEntity.Address = string.IsNullOrEmpty(updateOwner.Address) ? ownerEntity.Address : updateOwner.Address.Trim();
             ownerEntity.Photo = updateOwner.Photo == null ? ownerEntity.Photo : updateOwner.Photo;
             ownerEntity.Birthday = !updateOwner.Birthday.HasValue ? ownerEntity.Birthday : updateOwner.Birthday.Value;
-            Owner ownerUpdate = await this._ownerRepository.UpdateAsync(ownerEntity);
-
-            return _mapper.Map<Owner, ReadOwner>(ownerUpdate);
+            await this._ownerRepository.UpdateAsync(ownerEntity);
 
         }
 

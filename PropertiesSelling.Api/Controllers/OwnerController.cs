@@ -56,13 +56,13 @@ namespace PropertiesSelling.Api.Controllers
                     return BadRequest(new ApiResponse("Query error! - Model is not valid", updateRequest, 400));
                 }
 
-                var responseUpdate = await _ownerService.UpdateOwner(updateRequest);
+                await _ownerService.UpdateOwner(updateRequest);
 
-                return Ok(new ApiResponse("Query done!", responseUpdate, 200));
+                return Ok(new ApiResponse("Query done!", "Owner update", 200));
             }
             catch (Exception ex)
             {
-                return BadRequest(new ApiResponse("Query error!", ex, 400));
+                return BadRequest(new ApiResponse("Query error!", ex.Message, 400));
             }
 
         }
