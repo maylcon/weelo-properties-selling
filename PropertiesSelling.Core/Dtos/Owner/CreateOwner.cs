@@ -3,17 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PropertiesSelling.Core.Dtos
 {
-    public class CreateOwner
+    public class CreateOwner 
     {
         [Required]
         [MaxLength(100)]
-        public String Name { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [MaxLength(100)]
-        public String Address { get; set; }
+        public string Address { get; set; }
 
-        public Byte[] Photo { get; set; }
+        public byte[] Photo { get; set; }
 
         [Required]
         public DateTime Birthday { get; set; }

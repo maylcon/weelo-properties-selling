@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PropertiesSelling.Core.Definitions
 {
-    public class IEntity
+    public interface IEntity
     {
     }
 }

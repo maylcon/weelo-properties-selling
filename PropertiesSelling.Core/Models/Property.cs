@@ -1,12 +1,10 @@
-﻿using System;
+﻿using PropertiesSelling.Core.Definitions;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PropertiesSelling.Core.Models
 {
-    public class Property
+    public class Property : IEntity
     {
         public Guid IdProperty { get; set; }
 

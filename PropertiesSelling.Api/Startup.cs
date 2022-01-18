@@ -2,13 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PropertiesSelling.Core.Definitions.Repository;
 using PropertiesSelling.Core.Definitions.Service;
 using PropertiesSelling.Core.Implements.Services;
+using PropertiesSelling.Infraestructure.Context;
+using PropertiesSelling.Infraestructure.Implements.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,10 +35,14 @@ namespace PropertiesSelling.Api
 
             services.AddControllers();
 
+            services.AddDbContext<DBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Singleton);
             services.AddScoped<IOwnerService, OwnerService>();
             services.AddScoped<IPropertyService, PropertyService>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IOwnerRepository, OwnerRepository>();
+            services.AddScoped<IPropertyRepository, PropertyRepository>();
 
-
+            services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PropertiesSelling.Api", Version = "v1" });

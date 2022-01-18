@@ -20,7 +20,7 @@ namespace PropertiesSelling.Api.Controllers
             _ownerService = ownerService;
         }
 
-        [HttpPost]
+        [HttpPost("createOwner")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,11 +39,11 @@ namespace PropertiesSelling.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new ApiResponse("Query error!", ex, 400));
+                return BadRequest(new ApiResponse("Query error!", ex.Message, 400));
             }
         }
 
-        [HttpPut]
+        [HttpPut("updateOwner")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -67,7 +67,7 @@ namespace PropertiesSelling.Api.Controllers
 
         }
 
-        [HttpGet]
+        [HttpGet("retrieveOwners")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

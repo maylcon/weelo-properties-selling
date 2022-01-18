@@ -14,28 +14,26 @@ namespace PropertiesSelling.Core.Implements.Services
     public class PropertyService : IPropertyService
     {
 
-        private readonly IPropertyRepository propertyRepository;
-        private readonly IOwnerRepository ownerRepository;
+        private readonly IPropertyRepository _propertyRepository;
         private readonly IMapper _mapper;
 
 
-        public PropertyService(IPropertyRepository propertyRepository, IOwnerRepository ownerRepository, IMapper mapper)
+        public PropertyService(IPropertyRepository propertyRepository, IMapper mapper)
         {
-            this.propertyRepository = propertyRepository;
-            this.ownerRepository = ownerRepository;
-            this._mapper = mapper;
+            _propertyRepository = propertyRepository;
+            _mapper = mapper;
         }
 
         public async Task<ReadProperty> CreateProperty(CreateProperty createProperty)
         {
             Property entity = _mapper.Map<CreateProperty, Property>(createProperty);
-            Property property = await this.propertyRepository.InsertAsync(entity);
+            Property property = await this._propertyRepository.InsertAsync(entity);
             return _mapper.Map<Property, ReadProperty>(property);
         }
 
         public async Task<ReadProperty> UpdateProperty(UpdateProperty updateProperty)
         {
-            var propertyEntity = this.propertyRepository.TableNoTracking.Where(x => x.IdProperty == updateProperty.IdProperty).FirstOrDefault();
+            var propertyEntity = this._propertyRepository.TableNoTracking.Where(x => x.IdProperty == updateProperty.IdProperty).FirstOrDefault();
             if (propertyEntity == null)
             {
                 throw new KeyNotFoundException();
@@ -48,35 +46,29 @@ namespace PropertiesSelling.Core.Implements.Services
             propertyEntity.Year = !updateProperty.Year.HasValue ? propertyEntity.Year : updateProperty.Year.Value;
             propertyEntity.IdOwner = !updateProperty.IdOwner.HasValue ? propertyEntity.IdOwner : updateProperty.IdOwner.Value;
 
-            Property propertyUpdate = await this.propertyRepository.UpdateAsync(propertyEntity);
+            Property propertyUpdate = await this._propertyRepository.UpdateAsync(propertyEntity);
             return _mapper.Map<Property, ReadProperty>(propertyUpdate);
 
         }
 
         public async Task<ReadProperty> UpdatePriceProperty(UpdatePriceProperty request)
         {
-            await this.propertyRepository.UpdatePrice(request.IdProperty, request.Price);
-            var result = this.propertyRepository.Table.FirstOrDefault(x => x.IdProperty == request.IdProperty);
+            await this._propertyRepository.UpdatePrice(request.IdProperty, request.Price);
+            var result = this._propertyRepository.Table.FirstOrDefault(x => x.IdProperty == request.IdProperty);
             return _mapper.Map<Property, ReadProperty>(result);
-        }
-
-
-        public Task DeleteProperty(Guid propertyId)
-        {
-            throw new NotImplementedException();
         }
 
 
         public async Task<IList<ReadProperty>> GetAllProperties()
         {
-            IList<Property> properties = await propertyRepository.GetAll();
+            IList<Property> properties = await _propertyRepository.GetAll();
 
             return _mapper.Map<IList<Property>, IList<ReadProperty>>(properties);
         }
 
         public IList<ReadProperty> GetAllPropertiesByFilters (SearchProperty searchProperty)
         {
-            var properties = this.propertyRepository.GetAll(
+            var properties = this._propertyRepository.GetAll(
                 name: searchProperty.Name,
                 address: searchProperty.Address,
                 minPrice: searchProperty.MinPrice,

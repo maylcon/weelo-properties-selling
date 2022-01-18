@@ -16,8 +16,6 @@ namespace PropertiesSelling.Core.Definitions.Service
 
         Task<ReadProperty> UpdatePriceProperty(UpdatePriceProperty request);
 
-        Task DeleteProperty(Guid propertyId);
-
         Task<IList<ReadProperty>> GetAllProperties();
 
         IList<ReadProperty> GetAllPropertiesByFilters(SearchProperty searchProperty);

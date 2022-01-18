@@ -22,7 +22,7 @@ namespace PropertiesSelling.Api.Controllers
             _propertyService = propertyService;
         }
 
-        [HttpPost]
+        [HttpPost("createProperty")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -45,7 +45,7 @@ namespace PropertiesSelling.Api.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("updateProperty")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -68,7 +68,7 @@ namespace PropertiesSelling.Api.Controllers
             }
         }
 
-        [HttpGet("Filter")]
+        [HttpGet("fetchPropertyByFilters")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -81,7 +81,7 @@ namespace PropertiesSelling.Api.Controllers
 
         }
 
-        [HttpPut("Price")]
+        [HttpPut("updatePriceProperty")]
         [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

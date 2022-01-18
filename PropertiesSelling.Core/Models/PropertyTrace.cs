@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PropertiesSelling.Core.Definitions;
+using System;
 
 namespace PropertiesSelling.Core.Models
 {
-    public class PropertyTrace
+    public class PropertyTrace : IEntity
     {
         public Guid IdPropertyTrace { get; set; }
 
